@@ -20,18 +20,25 @@ public class BankAccountServiceImpl implements BankAccountService {
     @Override
     public BankAccount createBankAccount(BankAccount bankAccount) {
         Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
-        System.out.println(customer);
         bankAccount.setCustomer(customer);
         return bankAccountRepo.save(bankAccount);
     }
 
     @Override
     public List<BankAccount> getAllBankAccounts() {
-        return bankAccountRepo.findAll();
+        List<BankAccount> bankAccountList = bankAccountRepo.findAll();
+        return bankAccountList.stream().peek(bankAccount -> {
+            Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+            bankAccount.setCustomer(customer);
+        }).toList();
     }
 
     @Override
     public BankAccount getBankAccountId(String accountId) {
-        return bankAccountRepo.findById(accountId).orElseThrow(() -> new BankAccountNotFoundException("bank account with id " + accountId));
+
+        BankAccount bankAccount = bankAccountRepo.findById(accountId).orElseThrow(() -> new BankAccountNotFoundException("bank account with id " + accountId));
+        Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+        bankAccount.setCustomer(customer);
+        return bankAccount;
     }
 }
