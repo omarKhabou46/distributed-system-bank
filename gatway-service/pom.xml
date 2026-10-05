@@ -11,7 +11,7 @@
 	<groupId>com.enset</groupId>
 	<artifactId>gatway-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gatway-service</name>
+	<name>gateway-service</name>
 	<description>gatway-service</description>
 	<url/>
 	<licenses>
@@ -46,6 +46,10 @@
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 	</dependencies>
 	<dependencyManagement>
