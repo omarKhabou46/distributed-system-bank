@@ -20,7 +20,7 @@ public class CustomerServiceApplication {
             for (int i = 0; i < 10; i++) {
                 Customer customer = Customer.builder()
                         .name("user"+i)
-                        .email("user+"+i+"@gmail.com")
+                        .email("user"+i+"@gmail.com")
                         .build();
                 custemerService.createCustomer(customer);
             }
