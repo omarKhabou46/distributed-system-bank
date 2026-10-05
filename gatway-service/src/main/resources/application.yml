@@ -5,10 +5,10 @@ spring:
         webflux:
           routes:
             - id: customer-service
-            - uri: http://localhost:8056/api/customer-service
-            - predicates:
-                - Path = /api/customer-service/**
+              uri: http://localhost:8056
+              predicates:
+                - Path=/api/customer-service/**
             - id: bank-service
-            - uri: http://localhost:8057/api/bank-account-service
-            - predicates:
-                - Path = /api/bank-account-service/**
+              uri: http://localhost:8057
+              predicates:
+                - Path=/api/bank-account-service/**
