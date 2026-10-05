@@ -1,14 +1,14 @@
-spring:
-  cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: customer-service
-              uri: lb://customer-service
-              predicates:
-                - Path=/api/customer-service/**
-            - id: bank-service
-              uri: lb://bank-account-service
-              predicates:
-                - Path=/api/bank-account-service/**
+#spring:
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          routes:
+#            - id: customer-service
+#              uri: lb://customer-service
+#              predicates:
+#                - Path=/api/customer-service/**
+#            - id: bank-service
+#              uri: lb://bank-account-service
+#              predicates:
+#                - Path=/api/bank-account-service/**
