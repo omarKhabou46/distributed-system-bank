@@ -1,10 +1,8 @@
 package com.enset.bankservice.entity;
 
+import com.enset.bankservice.client.dto.Customer;
 import com.enset.bankservice.entity.enimiration.AccountType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +22,6 @@ public class BankAccount {
     private LocalDateTime createdAt;
     private AccountType type;
     private Long customerId;
+    @Transient
+    private Customer customer;
 }
