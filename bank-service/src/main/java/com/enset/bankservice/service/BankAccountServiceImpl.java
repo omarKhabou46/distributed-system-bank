@@ -19,7 +19,12 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @Override
     public BankAccount createBankAccount(BankAccount bankAccount) {
-        Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+        Customer customer = null;
+        try {
+            customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         bankAccount.setCustomer(customer);
         return bankAccountRepo.save(bankAccount);
     }
@@ -28,7 +33,12 @@ public class BankAccountServiceImpl implements BankAccountService {
     public List<BankAccount> getAllBankAccounts() {
         List<BankAccount> bankAccountList = bankAccountRepo.findAll();
         return bankAccountList.stream().peek(bankAccount -> {
-            Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+            Customer customer = null;
+            try {
+                customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             bankAccount.setCustomer(customer);
         }).toList();
     }
@@ -37,7 +47,12 @@ public class BankAccountServiceImpl implements BankAccountService {
     public BankAccount getBankAccountId(String accountId) {
 
         BankAccount bankAccount = bankAccountRepo.findById(accountId).orElseThrow(() -> new BankAccountNotFoundException("bank account with id " + accountId));
-        Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+        Customer customer = null;
+        try {
+            customer = customerClient.getCustomerById(bankAccount.getCustomerId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         bankAccount.setCustomer(customer);
         return bankAccount;
     }
