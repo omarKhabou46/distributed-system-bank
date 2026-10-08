@@ -16,9 +16,9 @@ public class ChatBotController {
 
     private final ChatBotService chatBotService;
 
-    @GetMapping
-    public ResponseEntity<String> chat(@RequestParam String message) {
-        return new ResponseEntity<>(chatBotService.chat(message), HttpStatus.OK);
+    @GetMapping("/chat")
+    public ResponseEntity<String> chat(@RequestParam String message, @RequestParam String conversationId) {
+        return new ResponseEntity<>(chatBotService.chat(message, conversationId), HttpStatus.OK);
     }
 
 }
