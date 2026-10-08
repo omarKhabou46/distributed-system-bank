@@ -1,12 +1,14 @@
-package com.enset.chatbotservice;
+package com.enset.chatbotservice.service;
 
 
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.stereotype.Service;
 
-public class ChatBot {
+@Service
+public class ChatBotService {
    private final ChatClient chatClient;
 
-    public ChatBot(ChatClient.Builder chatClient) {
+    public ChatBotService(ChatClient.Builder chatClient) {
         this.chatClient = chatClient.build();
     }
 
