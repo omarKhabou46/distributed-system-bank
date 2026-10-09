@@ -4,6 +4,8 @@ import com.enset.customerservice.dao.CustomerRepository;
 import com.enset.customerservice.entity.Customer;
 import com.enset.customerservice.exception.CustomerNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,18 +16,30 @@ public class CustomerServiceImpl implements CustemerService {
 
     private final CustomerRepository customerRepository;
 
+    @McpTool(description = "create new customer")
     @Override
-    public Customer createCustomer(Customer customer) {
-        return customerRepository.save(customer);
+    public Customer createCustomer(
+            @McpToolParam(description = "the customer to added with name, and email")
+            Customer customer) {
+
+        System.out.println("Customer reçu : " + customer);
+
+        Customer saved = customerRepository.save(customer);
+
+        System.out.println("Customer enregistré : " + saved);
+
+        return saved;
     }
 
+    @McpTool(description = "get all customers")
     @Override
     public List<Customer> findAllCustomer() {
         return customerRepository.findAll();
     }
 
+    @McpTool(description = "get customer by id")
     @Override
-    public Customer findCustomerById(long id) {
+    public Customer findCustomerById(@McpToolParam(description = "the id of the cutsomer to find") long id) {
         return customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException("customer with id "+ id + " not found"));
     }
 }
