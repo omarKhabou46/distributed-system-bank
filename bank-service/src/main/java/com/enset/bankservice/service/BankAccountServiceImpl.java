@@ -19,16 +19,27 @@ public class BankAccountServiceImpl implements BankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final CustomerClient customerClient;
 
-    @McpTool(description = "create new bankAccount")
+    @McpTool(description = """
+    Create a bank account with a balance, an account type
+    (CURRENT_ACCOUNT or SAVING_ACCOUNT), and an existing customer ID.
+    """)
     @Override
-    public BankAccount createBankAccount(@McpToolParam(description = "account to added bankAccount(balance, AccountType(CURRENT_ACCOUNT, SAVING_ACCOUNT), customerId)") BankAccount bankAccount) {
-        Customer customer = null;
-        try {
-            customer = customerClient.getCustomerById(bankAccount.getCustomerId());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    public BankAccount createBankAccount(
+            @McpToolParam(description = "The bank account details: balance, type, and customerId")
+            BankAccount bankAccount) {
+
+        Customer customer = customerClient.getCustomerById(
+                bankAccount.getCustomerId()
+        );
+
+        if (customer == null) {
+            throw new IllegalArgumentException(
+                    "Customer not found: " + bankAccount.getCustomerId()
+            );
         }
+
         bankAccount.setCustomer(customer);
+
         return bankAccountRepo.save(bankAccount);
     }
 

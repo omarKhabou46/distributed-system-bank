@@ -20,6 +20,7 @@ public class BankAccount {
     private BigDecimal balance;
     @CreationTimestamp
     private LocalDateTime createdAt;
+    @Enumerated(EnumType.STRING)
     private AccountType type;
     private Long customerId;
     @Transient
