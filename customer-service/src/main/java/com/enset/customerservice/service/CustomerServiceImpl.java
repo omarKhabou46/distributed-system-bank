@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustemerService {
 
     private final CustomerRepository customerRepository;
 
-    @McpTool(description = "create new customer")
+    @McpTool(description = "creer un nouveau cutsomer")
     @Override
     public Customer createCustomer(
             @McpToolParam(description = "the customer to added with name, and email")
