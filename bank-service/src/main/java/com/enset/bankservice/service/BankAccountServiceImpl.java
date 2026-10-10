@@ -6,6 +6,8 @@ import com.enset.bankservice.dao.BankAccountRepo;
 import com.enset.bankservice.entity.BankAccount;
 import com.enset.bankservice.exception.BankAccountNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ai.mcp.annotation.McpTool;
+import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,9 @@ public class BankAccountServiceImpl implements BankAccountService {
     private final BankAccountRepo bankAccountRepo;
     private final CustomerClient customerClient;
 
+    @McpTool(description = "create new bankAccount")
     @Override
-    public BankAccount createBankAccount(BankAccount bankAccount) {
+    public BankAccount createBankAccount(@McpToolParam(description = "account to added bankAccount(balance, AccountType(CURRENT_ACCOUNT, SAVING_ACCOUNT), customerId)") BankAccount bankAccount) {
         Customer customer = null;
         try {
             customer = customerClient.getCustomerById(bankAccount.getCustomerId());
@@ -29,6 +32,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         return bankAccountRepo.save(bankAccount);
     }
 
+    @McpTool(description = "get all bank accounts")
     @Override
     public List<BankAccount> getAllBankAccounts() {
         List<BankAccount> bankAccountList = bankAccountRepo.findAll();
@@ -43,8 +47,9 @@ public class BankAccountServiceImpl implements BankAccountService {
         }).toList();
     }
 
+    @McpTool(description = "get bank account by accountId")
     @Override
-    public BankAccount getBankAccountId(String accountId) {
+    public BankAccount getBankAccountId(@McpToolParam(description = "account id") String accountId) {
 
         BankAccount bankAccount = bankAccountRepo.findById(accountId).orElseThrow(() -> new BankAccountNotFoundException("bank account with id " + accountId));
         Customer customer = null;
