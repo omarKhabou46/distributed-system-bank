@@ -16,8 +16,14 @@ public class ChatBotService {
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultTools(toolCallbackProvider)
                 .defaultSystem("""
-                        vous etes un agent dans une banque
-                        """)
+                        You are a helpful assistant.
+                        Use available tools to answer questions and perform requested operations.
+                        When the user asks to create a customer, call the appropriate tool.
+                        Extract the customer's name and email from the user's message.
+                        If required information is missing, ask the user for clarification.
+                        Never claim an operation succeeded unless the tool confirms it.
+                        If the request is outside your scope, answer: "I don't know."
+                        Respond in the same language as the user.""")
                 .build();
     }
 
