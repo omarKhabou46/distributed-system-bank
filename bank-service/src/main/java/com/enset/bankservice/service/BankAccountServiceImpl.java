@@ -3,8 +3,10 @@ package com.enset.bankservice.service;
 import com.enset.bankservice.client.CustomerClient;
 import com.enset.bankservice.client.dto.Customer;
 import com.enset.bankservice.dao.BankAccountRepo;
+import com.enset.bankservice.dto.BankAccountDTOResponse;
 import com.enset.bankservice.entity.BankAccount;
 import com.enset.bankservice.exception.BankAccountNotFoundException;
+import com.enset.bankservice.mapper.BankAccountMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
@@ -18,6 +20,7 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     private final BankAccountRepo bankAccountRepo;
     private final CustomerClient customerClient;
+    private final BankAccountMapper bankAccountMapper;
 
     @McpTool(description = """
     Create a bank account with a balance, an account type
@@ -45,16 +48,12 @@ public class BankAccountServiceImpl implements BankAccountService {
 
     @McpTool(description = "get all bank accounts")
     @Override
-    public List<BankAccount> getAllBankAccounts() {
+    public List<BankAccountDTOResponse> getAllBankAccounts() {
         List<BankAccount> bankAccountList = bankAccountRepo.findAll();
-        return bankAccountList.stream().peek(bankAccount -> {
-            Customer customer = null;
-            try {
-                customer = customerClient.getCustomerById(bankAccount.getCustomerId());
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        return bankAccountList.stream().map(bankAccount -> {
+            Customer customer = customerClient.getCustomerById(bankAccount.getCustomerId());
             bankAccount.setCustomer(customer);
+            return bankAccountMapper.toDto(bankAccount);
         }).toList();
     }
 
