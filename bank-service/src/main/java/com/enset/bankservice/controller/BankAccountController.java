@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/bank-account-service")
+@CrossOrigin(origins = "*")
 public class BankAccountController {
     private final BankAccountService bankAccountService;
 

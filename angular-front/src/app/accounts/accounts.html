@@ -1,1 +1,9 @@
-<p>accounts works!</p>
+
+<div class="p-3">
+
+  @if (accounts().length === 0) {
+    <p>Aucun compte bancaire disponible.</p>
+  } @else {
+    <p>Les comptes bancaires sont disponibles.</p>
+  }
+</div>
