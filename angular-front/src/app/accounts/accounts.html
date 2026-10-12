@@ -4,6 +4,24 @@
   @if (accounts().length === 0) {
     <p>Aucun compte bancaire disponible.</p>
   } @else {
-    <p>Les comptes bancaires sont disponibles.</p>
+    <table class="table">
+      <thead>
+       <tr>
+         <th>Id</th><th>Balance</th><th>CreatedAt</th><th>Type</th><th>CustomerId</th><th>CustomerName</th>
+       </tr>
+      </thead>
+      <tbody>
+        @for (account of accounts(); track account.id) {
+          <tr>
+            <td>{{account.id}}</td>
+            <td>{{account.balance}}</td>
+            <td>{{account.createdAt}}</td>
+            <td>{{account.type}}</td>
+            <td>{{account.customerId}}</td>
+            <td>{{account.customerName}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   }
 </div>
