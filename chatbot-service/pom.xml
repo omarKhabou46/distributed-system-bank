@@ -33,28 +33,28 @@
     </properties>
     <dependencies>
         <!-- Source: https://mvnrepository.com/artifact/com.zgamelogic/spring-boot-starter-discord -->
-        <dependency>
-            <groupId>com.zgamelogic</groupId>
-            <artifactId>spring-boot-starter-discord</artifactId>
-            <version>5.0.4</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.zgamelogic</groupId>-->
+<!--            <artifactId>spring-boot-starter-discord</artifactId>-->
+<!--            <version>5.0.4</version>-->
+<!--        </dependency>-->
 
 
         <!-- Source: https://mvnrepository.com/artifact/com.github.kshashov/spring-boot-starter-telegram -->
-        <dependency>
-            <groupId>org.telegram</groupId>
-            <artifactId>telegrambots-spring-boot-starter</artifactId>
-            <version>6.9.7.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.telegram</groupId>-->
+<!--            <artifactId>telegrambots-spring-boot-starter</artifactId>-->
+<!--            <version>6.9.7.1</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.ai</groupId>
-            <artifactId>spring-ai-starter-model-ollama</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.ai</groupId>-->
+<!--            <artifactId>spring-ai-starter-model-ollama</artifactId>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
@@ -78,6 +78,10 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-mcp-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-model-openai</artifactId>
         </dependency>
 
 
