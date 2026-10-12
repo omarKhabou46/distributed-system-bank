@@ -1,5 +1,6 @@
 package com.enset.bankservice.controller;
 
+import com.enset.bankservice.dto.BankAccountDTOResponse;
 import com.enset.bankservice.entity.BankAccount;
 import com.enset.bankservice.service.BankAccountService;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/bank-account-service")
+@CrossOrigin(origins = "*")
 public class BankAccountController {
     private final BankAccountService bankAccountService;
 
@@ -20,7 +22,7 @@ public class BankAccountController {
     }
 
     @GetMapping("/accounts")
-    public ResponseEntity<List<BankAccount>> getAllBankAccounts() {
+    public ResponseEntity<List<BankAccountDTOResponse>> getAllBankAccounts() {
         return ResponseEntity.ok(bankAccountService.getAllBankAccounts());
     }
 
