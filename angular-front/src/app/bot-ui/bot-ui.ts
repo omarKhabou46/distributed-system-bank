@@ -9,6 +9,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
   selector: 'app-bot-ui',
   styleUrl: './bot-ui.css',
   templateUrl: './bot-ui.html',
+  standalone: true
 })
 export class BotUi {
 
