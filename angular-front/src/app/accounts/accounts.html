@@ -1,9 +1,33 @@
 
-<div class="p-3">
+<div class="p-5">
 
-  @if (accounts().length === 0) {
-    <p>Aucun compte bancaire disponible.</p>
+  @if (isLoading()) {
+    <span class="inline-block h-7 w-16 rounded bg-slate-100 animate-pulse"></span>
   } @else {
-    <p>Les comptes bancaires sont disponibles.</p>
+    @if (accounts().length === 0) {
+      <p>Aucun compte bancaire disponible.</p>
+    } @else {
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Id</th><th>Balance</th><th>CreatedAt</th><th>Type</th><th>CustomerId</th><th>CustomerName</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (account of accounts(); track account.id) {
+            <tr>
+              <td>{{account.id}}</td>
+              <td>{{account.balance | number:'1.2-2'}}</td>
+              <td>{{account.createdAt | date: "dd/MM/yyyy HH:MM"}}</td>
+              <td>{{account.type}}</td>
+              <td>{{account.customerId}}</td>
+              <td>{{account.customerName}}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
   }
+  
+  
 </div>
