@@ -33,20 +33,10 @@ Configuration (variables courantes)
 - SPRING_DATASOURCE_PASSWORD=pass
 - SERVER_PORT=8082
 
-Tests
-
-```bash
-mvn test
-```
-
-Docker
-
-```bash
-docker build -t customer-service:latest .
-docker run -p 8082:8082 customer-service:latest
-```
-
 Notes pour les développeurs
 
 - Vérifier la validation des données dans CustomerRequestDTO.
 - Ajouter des tests d'intégration pour les cas d'erreur (client non trouvé).
+
+<img width="447" height="256" alt="image" src="https://github.com/user-attachments/assets/bb7ed39f-cd70-425c-b375-edc610c98e06" />
+
