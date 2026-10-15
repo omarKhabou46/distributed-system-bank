@@ -16,6 +16,7 @@ export class BotUi {
   private readonly botService = inject(BotService);
   private fb = inject(FormBuilder);
   response = signal<String>("");
+  isLoading = signal(false);
 
   askForm = this.fb.group({
     question: ['', Validators.required]
@@ -28,8 +29,10 @@ export class BotUi {
 
     const question = this.askForm.value.question;
     if (question) {
+      this.isLoading.set(true)
       this.botService.chat(question, "omar").subscribe({
         next: (res) =>  {
+          this.isLoading.set(false);
           this.response.set(res);
           this.askForm.reset();
         }

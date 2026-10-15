@@ -1,5 +1,6 @@
 package com.enset.customerservice;
 
+import com.enset.customerservice.dto.CustomerRequestDTO;
 import com.enset.customerservice.entity.Customer;
 import com.enset.customerservice.service.CustemerService;
 import org.springframework.boot.CommandLineRunner;
@@ -18,11 +19,8 @@ public class CustomerServiceApplication {
     CommandLineRunner runner(CustemerService custemerService) {
         return args -> {
             for (int i = 0; i < 10; i++) {
-                Customer customer = Customer.builder()
-                        .name("user"+i)
-                        .email("user"+i+"@gmail.com")
-                        .build();
-                custemerService.createCustomer(customer);
+                CustomerRequestDTO customerRequestDTO = new CustomerRequestDTO("user"+i, "user"+1+"@gmail.com");
+                custemerService.createCustomer(customerRequestDTO);
             }
         };
     }

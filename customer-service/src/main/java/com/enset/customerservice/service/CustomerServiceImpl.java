@@ -1,6 +1,7 @@
 package com.enset.customerservice.service;
 
 import com.enset.customerservice.dao.CustomerRepository;
+import com.enset.customerservice.dto.CustomerRequestDTO;
 import com.enset.customerservice.entity.Customer;
 import com.enset.customerservice.exception.CustomerNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +21,11 @@ public class CustomerServiceImpl implements CustemerService {
     @Override
     public Customer createCustomer(
             @McpToolParam(description = "the customer to added with name, and email")
-            Customer customer) {
+            CustomerRequestDTO customerRequestDTO) {
 
-        System.out.println("Customer reçu : " + customer);
+        Customer customer = new Customer();
+        customer.setName(customerRequestDTO.name());
+        customer.setEmail(customerRequestDTO.email());
 
         Customer saved = customerRepository.save(customer);
 
