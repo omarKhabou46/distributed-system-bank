@@ -1,10 +1,12 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {BotService} from '../services/bot/bot-service';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MarkdownComponent} from 'ngx-markdown';
 
 @Component({
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MarkdownComponent
   ],
   selector: 'app-bot-ui',
   styleUrl: './bot-ui.css',
@@ -15,7 +17,7 @@ export class BotUi {
 
   private readonly botService = inject(BotService);
   private fb = inject(FormBuilder);
-  response = signal<String>("");
+  response = signal<string>("");
   isLoading = signal(false);
 
   askForm = this.fb.group({
