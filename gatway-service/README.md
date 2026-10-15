@@ -29,14 +29,30 @@ Configuration
 - Les routes peuvent être définies dans application.yml ou automatiquement via le service de découverte.
 - Vérifier les propriétés spring.cloud.gateway.discovery.locator si utilisées.
 
-Docker
-
-```bash
-docker build -t gateway-service:latest .
-docker run -p 8080:8080 gateway-service:latest
-```
-
 Notes
 
 - Le nom du projet contient "gatway" dans le code; envisager de renommer en "gateway" pour cohérence.
 - Assurer que le Discovery Server est accessible (Eureka) pour la résolution des routes.
+
+## Intégration avec la Gateway
+
+Ce service est enregistré auprès du service de découverte (Eureka) sous le nom `customer-service`.
+Il est exposé via **Spring Cloud Gateway** avec la configuration de routes suivante
+(à placer dans le `application.yml` de la **gateway**, pas de ce service) :
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: customer-service
+              uri: lb://customer-service
+              predicates:
+                - Path=/api/customer-service/**
+            - id: bank-service
+              uri: lb://bank-account-service
+              predicates:
+                - Path=/api/bank-account-service/**
+```
