@@ -36,12 +36,29 @@ export class BotUi {
         next: (res) =>  {
           this.isLoading.set(false);
           this.response.set(res);
-          this.askForm.reset();
         }
       })
     }
+  }
 
 
+  askStream() {
+    if (this.askForm.invalid) return;
+
+    const question = this.askForm.value.question;
+    if (!question) return;
+
+    this.response.set('');
+    this.isLoading.set(true);
+
+    this.botService.chatStream(question, 'omar').subscribe({
+      next: (chunk) => this.response.update(current => current + chunk),
+      complete: () => this.isLoading.set(false),
+      error: (err) => {
+        console.error('Erreur streaming :', err);
+        this.isLoading.set(false);
+      }
+    });
   }
 
 

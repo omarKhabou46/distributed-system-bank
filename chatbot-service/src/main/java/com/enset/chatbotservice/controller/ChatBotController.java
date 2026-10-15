@@ -3,6 +3,7 @@ package com.enset.chatbotservice.controller;
 import com.enset.chatbotservice.service.ChatBotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -20,9 +21,10 @@ public class ChatBotController {
         return new ResponseEntity<>(chatBotService.chat(message, conversationId), HttpStatus.OK);
     }
 
-    @GetMapping("/chatStrem")
-    public ResponseEntity<Flux<String>> chatStrem(@RequestParam String message, @RequestParam String conversationId) {
-        return new ResponseEntity<>(chatBotService.chatStream(message, conversationId), HttpStatus.OK);
+    @GetMapping(value = "/chatStream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> chatStream(@RequestParam String message,
+                                   @RequestParam String conversationId) {
+        return chatBotService.chatStream(message, conversationId);
     }
 
 
