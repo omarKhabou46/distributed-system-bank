@@ -6,6 +6,7 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 public class ChatBotService {
@@ -33,5 +34,16 @@ public class ChatBotService {
                  ))
                 .call()
                 .content();
+    }
+
+    public Flux<String> chatStream(String message, String conversationId) {
+        return chatClient
+                .prompt()
+                .user(message)
+                .advisors(advisor -> advisor.param(
+                        ChatMemory.CONVERSATION_ID,
+                        conversationId
+                ))
+                .stream().content();
     }
 }
