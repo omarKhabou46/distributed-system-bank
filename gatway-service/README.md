@@ -34,11 +34,7 @@ Notes
 - Le nom du projet contient "gatway" dans le code; envisager de renommer en "gateway" pour cohérence.
 - Assurer que le Discovery Server est accessible (Eureka) pour la résolution des routes.
 
-## Intégration avec la Gateway
-
-Ce service est enregistré auprès du service de découverte (Eureka) sous le nom `customer-service`.
-Il est exposé via **Spring Cloud Gateway** avec la configuration de routes suivante
-(à placer dans le `application.yml` de la **gateway**, pas de ce service) :
+## Utilisation de Routage static
 
 ```yaml
 spring:
