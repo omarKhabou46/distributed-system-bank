@@ -1,59 +1,42 @@
-# gatway-service
+# gateway-service
 
 Description
 
-Service de gateway (passerelle) gérant le routage des requêtes vers les différents services du projet bank-micro-service.
+Passerelle API basée sur Spring Cloud Gateway. Utilise la découverte de services pour définir dynamiquement les routes vers les microservices enregistrés.
+
+Fonctionnalités principales
+
+- Routes dynamiques fournies par DiscoveryClientRouteDefinitionLocator (routes basées sur le Discovery Client).
+- Exemple de routes (commentées dans application.yml) :
+  - redirection de /api/customer-service/** vers customer-service
+  - redirection de /api/bank-account-service/** vers bank-account-service
+- Expose des endpoints d'actuator si activés (monitoring et santé).
 
 Prérequis
 
 - Java 17+
 - Maven
 
-Installation & compilation
+Compilation et exécution
 
 ```bash
 mvn clean package
-```
-
-Lancer en local
-
-```bash
 mvn spring-boot:run
-# ou
-java -jar target/*.jar
 ```
 
-Variables d'environnement (exemples)
+Configuration
 
-- ROUTING_CONFIG=...
-- SERVER_PORT=8080
-
-Endpoints principaux
-
-- /actuator/**
-- Routes configurées via la configuration (application.yml/properties)
-
-Tests
-
-```bash
-mvn test
-```
+- Les routes peuvent être définies dans application.yml ou automatiquement via le service de découverte.
+- Vérifier les propriétés spring.cloud.gateway.discovery.locator si utilisées.
 
 Docker
 
 ```bash
-docker build -t gatway-service:latest .
-docker run -p 8080:8080 gatway-service:latest
+docker build -t gateway-service:latest .
+docker run -p 8080:8080 gateway-service:latest
 ```
 
-Contribution
+Notes
 
-Ouvrir une MR et documenter les modifications de routage.
-
-Licence
-
-Voir la racine du dépôt.
-
-TODO
-
-- Corriger le nom si nécessaire (gateway vs gatway) et compléter les routes.
+- Le nom du projet contient "gatway" dans le code; envisager de renommer en "gateway" pour cohérence.
+- Assurer que le Discovery Server est accessible (Eureka) pour la résolution des routes.

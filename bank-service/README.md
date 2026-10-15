@@ -2,39 +2,38 @@
 
 Description
 
-Service central gérant la logique métier des comptes et opérations bancaires du projet bank-micro-service.
+Service gérant les comptes bancaires : création de comptes, récupération de comptes et intégration avec le service client.
+
+Fonctionnalités principales
+
+- POST /api/bank-account-service  — créer un compte bancaire (corps: BankAccount JSON).
+- GET /api/bank-account-service/accounts — récupérer la liste des comptes (renvoie des DTO BankAccountDTOResponse).
+- GET /api/bank-account-service/account/{id} — récupérer un compte par son identifiant.
+- Communication avec customer-service via Feign client (CustomerClient) pour récupérer les informations clients.
+- Résilience: circuit breaker (Resilience4j) avec fallback pour les appels au service client.
+- Gestion globale des exceptions via GlobalExceptionHandler.
 
 Prérequis
 
 - Java 17+
 - Maven
-- Base de données (ex : PostgreSQL) si nécessaire
+- Base de données (ex: PostgreSQL)
 
-Installation & compilation
+Compilation et exécution
 
 ```bash
 mvn clean package
-```
-
-Lancer en local
-
-```bash
 mvn spring-boot:run
 # ou
 java -jar target/*.jar
 ```
 
-Configuration / Variables d'environnement (exemples)
+Configuration (variables courantes)
 
 - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/bankdb
 - SPRING_DATASOURCE_USERNAME=user
 - SPRING_DATASOURCE_PASSWORD=pass
 - SERVER_PORT=8081
-
-Endpoints (à compléter)
-
-- GET /api/accounts — lister les comptes
-- POST /api/accounts — créer un compte
 
 Tests
 
@@ -49,14 +48,7 @@ docker build -t bank-service:latest .
 docker run -e SPRING_DATASOURCE_URL=... -p 8081:8081 bank-service:latest
 ```
 
-Contribution
+Notes pour les développeurs
 
-Ouverture de MR, respecter les conventions de commits et ajouter des tests.
-
-Licence
-
-Voir la racine du dépôt.
-
-TODO
-
-- Vérifier et compléter les endpoints et variables d'environnement.
+- Vérifier le mapping des DTO (BankAccountDTOResponse) et la validation des entrées.
+- Adapter les paramètres de circuit breaker/resilience selon l'environnement.

@@ -2,36 +2,30 @@
 
 Description
 
-Service de découverte (ex : Eureka/Consul) permettant aux services du projet bank-micro-service de se découvrir mutuellement.
+Serveur de découverte basé sur Eureka (@EnableEurekaServer). Permet l'enregistrement et la découverte des microservices du système.
+
+Fonctionnalités principales
+
+- Fournit un annuaire Eureka pour que les services (customer-service, bank-service, gateway, ...) s'enregistrent et se découvrent.
+- Interface d'administration Eureka (par défaut sur /) pour visualiser les instances enregistrées.
 
 Prérequis
 
 - Java 17+
 - Maven
 
-Installation & compilation
+Compilation et exécution
 
 ```bash
 mvn clean package
-```
-
-Lancer en local
-
-```bash
 mvn spring-boot:run
 # ou
 java -jar target/*.jar
 ```
 
-Configuration (exemples)
+Configuration
 
-- SERVER_PORT=8761
-
-Tests
-
-```bash
-mvn test
-```
+- Port par défaut typique : 8761 (configurable via application.properties/yml).
 
 Docker
 
@@ -40,14 +34,7 @@ docker build -t discovery-service:latest .
 docker run -p 8761:8761 discovery-service:latest
 ```
 
-Contribution
+Notes
 
-Merci d'ouvrir des MR pour les améliorations ou corrections.
-
-Licence
-
-Voir la racine du dépôt.
-
-TODO
-
-- Préciser le mécanisme de découverte utilisé et l'URL d'administration.
+- Assurer que les autres services pointent vers ce serveur via eureka.client.serviceUrl.defaultZone.
+- Sécuriser l'accès si nécessaire pour la production.
