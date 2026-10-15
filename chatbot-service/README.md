@@ -2,38 +2,32 @@
 
 Description
 
-Service de chat (chatbot) faisant partie du projet bank-micro-service. Fournit des endpoints pour l'interaction conversationnelle et l'orchestration des dialogues.
+Service chatbot fournissant des capacités de conversation et de streaming de réponses. Deux modes sont exposés :
+- Chat synchrone : reçoit un message et renvoie une réponse texte.
+- Chat en streaming (SSE) : renvoie un flux de réponses (text/event-stream) pour les longues réponses ou mises à jour progressives.
+
+Fonctionnalités principales
+
+- Endpoint GET /api/chat-service/chat?message={message}&conversationId={conversationId} — réponse texte synchrone.
+- Endpoint GET /api/chat-service/chatStream?message={message}&conversationId={conversationId} — flux SSE de réponses.
+- Gestion simple du contexte via conversationId.
+- Intégration avec ChatBotService pour la génération de réponses.
+- CORS activé pour permettre des appels depuis le front.
 
 Prérequis
 
-- Java 17+ (ou version requise par le projet)
+- Java 17+
 - Maven
 - Docker (optionnel)
 
-Installation & compilation
+Compilation et exécution
 
 ```bash
 mvn clean package
+mvn spring-boot:run
+# ou
+java -jar target/*.jar
 ```
-
-Lancer en local
-
-- Avec Maven :
-  ```bash
-  mvn spring-boot:run
-  ```
-- Ou exécuter le JAR produit :
-  ```bash
-  java -jar target/*.jar
-  ```
-
-Variables d'environnement
-
-- EXAMPLE_ENV=valeur  # ajouter les variables réelles ici
-
-Endpoints (exemples)
-
-- POST /api/chat/message  — envoyer un message au chatbot
 
 Tests
 
@@ -45,17 +39,10 @@ Docker
 
 ```bash
 docker build -t chatbot-service:latest .
-docker run -e EXAMPLE_ENV=valeur -p 8080:8080 chatbot-service:latest
+docker run -p 8090:8080 chatbot-service:latest
 ```
 
-Contribution
+Notes
 
-Merci d'ouvrir une MR pour toute amélioration. Décrire les changements et ajouter des tests lorsque possible.
-
-Licence
-
-Voir la racine du dépôt pour les informations de licence.
-
-TODO
-
-- Compléter les variables d'environnement et les endpoints réels.
+- Ajuster le port et variables d'environnement selon la configuration.
+- Compléter la documentation si des paramètres supplémentaires de la ChatBotService sont exposés.

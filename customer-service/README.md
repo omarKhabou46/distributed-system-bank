@@ -2,39 +2,36 @@
 
 Description
 
-Service gérant les informations clients (CRUD) pour le projet bank-micro-service.
+Service de gestion des clients (CRUD). Fournit des endpoints pour créer et consulter des clients et expose un client REST utilisé par d'autres services.
+
+Fonctionnalités principales
+
+- POST /api/customer-service  — créer un client (corps: CustomerRequestDTO).
+- GET /api/customer-service/customers — lister tous les clients.
+- GET /api/customer-service/customer/{id} — récupérer un client par son identifiant.
+- Levée d'exception CustomerNotFoundException si le client n'existe pas (gérée par un GlobalExceptionHandler).
 
 Prérequis
 
 - Java 17+
 - Maven
-- Base de données (ex : PostgreSQL)
+- Base de données (ex: PostgreSQL)
 
-Installation & compilation
+Compilation et exécution
 
 ```bash
 mvn clean package
-```
-
-Lancer en local
-
-```bash
 mvn spring-boot:run
 # ou
 java -jar target/*.jar
 ```
 
-Variables d'environnement (exemples)
+Configuration (variables courantes)
 
 - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/customers
 - SPRING_DATASOURCE_USERNAME=user
 - SPRING_DATASOURCE_PASSWORD=pass
 - SERVER_PORT=8082
-
-Endpoints (à compléter)
-
-- GET /api/customers — lister les clients
-- POST /api/customers — créer un client
 
 Tests
 
@@ -46,17 +43,10 @@ Docker
 
 ```bash
 docker build -t customer-service:latest .
-docker run -e SPRING_DATASOURCE_URL=... -p 8082:8082 customer-service:latest
+docker run -p 8082:8082 customer-service:latest
 ```
 
-Contribution
+Notes pour les développeurs
 
-Merci de proposer des MR et d'ajouter des tests pour les nouvelles fonctionnalités.
-
-Licence
-
-Voir la racine du dépôt.
-
-TODO
-
-- Compléter les endpoints et exemples d'utilisation.
+- Vérifier la validation des données dans CustomerRequestDTO.
+- Ajouter des tests d'intégration pour les cas d'erreur (client non trouvé).
