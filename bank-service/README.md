@@ -35,20 +35,10 @@ Configuration (variables courantes)
 - SPRING_DATASOURCE_PASSWORD=pass
 - SERVER_PORT=8081
 
-Tests
-
-```bash
-mvn test
-```
-
-Docker
-
-```bash
-docker build -t bank-service:latest .
-docker run -e SPRING_DATASOURCE_URL=... -p 8081:8081 bank-service:latest
-```
-
 Notes pour les développeurs
 
 - Vérifier le mapping des DTO (BankAccountDTOResponse) et la validation des entrées.
 - Adapter les paramètres de circuit breaker/resilience selon l'environnement.
+
+<img width="308" height="228" alt="image" src="https://github.com/user-attachments/assets/402a0ad4-8fb8-4906-92fa-90c66e001b08" />
+
