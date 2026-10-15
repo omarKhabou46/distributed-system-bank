@@ -1,5 +1,6 @@
 package com.enset.customerservice.controller;
 
+import com.enset.customerservice.dto.CustomerRequestDTO;
 import com.enset.customerservice.entity.Customer;
 import com.enset.customerservice.exception.CustomerNotFoundException;
 import com.enset.customerservice.service.CustemerService;
@@ -19,8 +20,8 @@ public class CustomerController {
 
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        return ResponseEntity.ok(custemerService.createCustomer(customer));
+    public ResponseEntity<Customer> createCustomer(@RequestBody CustomerRequestDTO customerRequestDTO) {
+        return ResponseEntity.ok(custemerService.createCustomer(customerRequestDTO));
     }
 
     @GetMapping("/customers")
