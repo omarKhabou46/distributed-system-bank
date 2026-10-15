@@ -17,21 +17,17 @@ public class CustomerServiceImpl implements CustemerService {
 
     private final CustomerRepository customerRepository;
 
-    @McpTool(description = "creer un nouveau cutsomer")
+    @McpTool(description = "Create a customer using their name and email")
     @Override
     public Customer createCustomer(
-            @McpToolParam(description = "the customer to added with name, and email")
+            @McpToolParam(description = "Customer details: name and email")
             CustomerRequestDTO customerRequestDTO) {
 
         Customer customer = new Customer();
         customer.setName(customerRequestDTO.name());
         customer.setEmail(customerRequestDTO.email());
 
-        Customer saved = customerRepository.save(customer);
-
-        System.out.println("Customer enregistré : " + saved);
-
-        return saved;
+        return customerRepository.save(customer);
     }
 
     @McpTool(description = "get all customers")
