@@ -27,14 +27,8 @@ Configuration
 
 - Port par défaut typique : 8761 (configurable via application.properties/yml).
 
-Docker
-
-```bash
-docker build -t discovery-service:latest .
-docker run -p 8761:8761 discovery-service:latest
-```
-
 Notes
 
 - Assurer que les autres services pointent vers ce serveur via eureka.client.serviceUrl.defaultZone.
 - Sécuriser l'accès si nécessaire pour la production.
+<img width="1841" height="959" alt="image" src="https://github.com/user-attachments/assets/b52eccf5-36ee-45a5-88db-dc486f92a06f" />
