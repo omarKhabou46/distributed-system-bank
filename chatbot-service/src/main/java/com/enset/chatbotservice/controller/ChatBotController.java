@@ -20,7 +20,7 @@ public class ChatBotController {
         return new ResponseEntity<>(chatBotService.chat(message, conversationId), HttpStatus.OK);
     }
 
-    @GetMapping("/chatStrem")
+    @GetMapping("/chatStream")
     public ResponseEntity<Flux<String>> chatStrem(@RequestParam String message, @RequestParam String conversationId) {
         return new ResponseEntity<>(chatBotService.chatStream(message, conversationId), HttpStatus.OK);
     }
