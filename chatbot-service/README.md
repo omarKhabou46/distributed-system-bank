@@ -29,19 +29,6 @@ mvn spring-boot:run
 java -jar target/*.jar
 ```
 
-Tests
-
-```bash
-mvn test
-```
-
-Docker
-
-```bash
-docker build -t chatbot-service:latest .
-docker run -p 8090:8080 chatbot-service:latest
-```
-
 Notes
 
 - Ajuster le port et variables d'environnement selon la configuration.
